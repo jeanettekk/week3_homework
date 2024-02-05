@@ -152,17 +152,27 @@ for index_gulliver, key_gulliver in enumerate(gulliver_dict.keys(), 1):
     # Format: 1d is for one digit, <20s is at least 20 characters in the string, 4d is four digits
     print('{:1d} {:<20s} {:4d}'.format(index_gulliver, key_gulliver, gulliver_dict[key_gulliver]))
 
-# if the value in gulliver_dict['Years Apart'] is NOT the same as gulliver_dict['Your Answer'], execute this code
-if gulliver_dict['Years Apart'] != gulliver_dict['Your Answer']:
+# The value of the key 'Years Apart' is subtracted from value in 'Your Answer' key
+# abs() method gives the absolute value, regardless if it's positive or negative
+# If the final value is NOT less than or equal to 20, execute the next code
+if not abs(gulliver_dict['Years Apart'] - gulliver_dict['Your Answer']) <= 20:
 
     # Prints a string to inform the player of their wrong answer.
     print('\nSorry, wrong answer. No points!')
 
 # if the value in gulliver_dict['Years Apart'] is the SAME as gulliver_dict['Your Answer'], execute this code
-else:
+elif gulliver_dict['Years Apart'] == gulliver_dict['Your Answer']:
 
-    # Prints a string to inform the player of scoring the final point
-    print('\nCorrect answer! Scored the final point')
+    # Prints a string to inform the player of scoring the two points
+    print('\nCorrect! You scored 2 points!')
+
+    # Adds 2 to the integer in the score variable and assigns the new value to the variable
+    score += 2
+
+# # If the absolute value is EQUAL to or LESS THAN 20, execute the next code
+else:
+    # Prints a string to inform the player of scoring one point
+    print('\nYour answer was within 20 years from the correct answer! Scored one point')
 
     # Adds 1 to the integer in the score variable and assigns the new value to the variable
     score += 1

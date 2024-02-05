@@ -1,33 +1,11 @@
-# Week 2 homework: Exercise 10, Parts 2 and 3
+# Jen - Improved Bank Pin Program - Week 3 Homework
 # importing getpass package to access getpass module inside it which hides user input (shows blank)
 import getpass
 
-# hardcode correct value of user PIN
-pin = '7860'
+# Prints a string to welcome the user
+print('\nAccess your Bank Account.')
 
-# Getting user PIN in for loop by using getpass module from getpass package and masking user pin with blank
-
-# iterative loop runs three times, from value of integer attempt_getpass = 1 to attempt_getpass =3 (excludes 4)
-for attempt_getpass in range(1, 4):
-    # assigns the value of pin string provided by user via getpass method to supplied_pin
-    # the getpass module from getpass package works fine with any string prompt
-    supplied_pin = getpass.getpass(prompt='Please enter your PIN: ')
-    # following code checks for condition if user input is equal to hardcoded value of user PIN
-    if supplied_pin == pin:
-        # if true, print success message and exit the program
-        print("Validation Success!")
-        break
-    else:
-        # otherwise print message that input is incorrect and count attempt_getpass
-        print(f"Incorrect PIN, you have used {attempt_getpass} attempt(s)\n{3 - attempt_getpass} attempt(s) remaining!")
-        # if three wrong attempts have been taken print pin is blocked and exit
-        if attempt_getpass == 3:
-            print("Your PIN is now blocked!")
-
-# Another way of achieving the same goals by using while loop instead
-print('\n2nd Version: Using a while loop')
-
-# The pin_attempts variable stores the max number of pin attempts
+# The pin_attempts variable stores the maximum number of pin attempts
 pin_attempts = 3
 
 # The correct_pin variable stores an integer, the correct pin to access the bank
@@ -42,7 +20,7 @@ security_answer = 'fluffy'
 # The pin_reset function will be used to reset correct_pin if the security question is answered correctly
 def pin_reset(attempts_parameter, correct_pin_parameter, security_parameter):
 
-    # if the argument passed in the attempts_parameter is equal to 0, execute the next code.
+    # if the argument passed in the attempts_parameter is equal to 0, no more attempts, execute the next code.
     if attempts_parameter == 0:
 
         # Prints a string to inform the user of failed attempts and ask the security question.
@@ -90,7 +68,32 @@ while pin_attempts > 0:
     if supplied_pin == correct_string:
 
         # Prints a string to indicate the user has entered their pin successfully
-        print('Welcome to High Street Bank!')
+        print('Welcome to High Street Bank!\n')
+
+        # Created a dictionary of account details and assigned it to the account variable
+        account = {'Name': 'Jane Doe', 'Account Number': 90653876, 'Funds': 5678}
+
+        # enumerate() function returns the index, starting at 1, and a tuple of each dictionary item
+        # The index, keys and values are unpacked and assigned to three variables during each iteration
+        for index_account, (key_account, value_account) in enumerate(account.items(), 1):
+
+            # isinstance() method checks if each value in the dictionary is a string
+            # If it's a string, then the format {:8s} is stored in the value_format variable
+            if isinstance(value_account, str):
+                value_format = '{:>8s}'
+
+            # If it is NOT a string, and it's key is 'Funds' then pounds unicode and {:7,d} format is stored in variable
+            elif key_account == 'Funds':
+                value_format = '\u00A3{:>7,d}'
+
+            # If it is NOT a string, and it's key is NOT 'Funds' then {:8} format is stored in the variable
+            else:
+                value_format = '{:>8}'
+
+            # Prints the index, keys and values of the account dictionary using formatting specifiers
+            # format() method is used twice, one for formatting the placeholders
+            # and another for formatting the string/integer values
+            print('{:1d} {:20s} {}'.format(index_account, key_account, value_format.format(value_account)))
 
         # break statement is used to exit a loop
         break
